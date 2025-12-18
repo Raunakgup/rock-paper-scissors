@@ -13,11 +13,9 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    return prompt("Enter your choice from rock, paper or scissors: ").toLowerCase();
+    return prompt("Enter your choice from rock, paper or scissors: ").trim().toLowerCase();
 }
 // console.log(getHumanChoice());
-
-let humanScore = computerScore = 0;
 
 function whoWins(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) return "tie";
@@ -36,18 +34,29 @@ function whoWins(humanChoice, computerChoice) {
             return "computer";
     }
 }
-function playRound(humanChoice, computerChoice) {
+function playRound(humanChoice, computerChoice, scores) {
     const winner = whoWins(humanChoice, computerChoice);
     if (winner === "human") {
         console.log(`Yay! ${humanChoice} beats ${computerChoice}. You win!`);
-        humanScore++;
+        scores.humanScore++;
     } else if (winner === "computer") {
         console.log(`Sad! ${computerChoice} beats ${humanChoice}. You lose!`);
-        computerScore++;
+        scores.computerScore++;
     } else {
         console.log(`Both chose ${humanChoice}. There's a tie!`);
     }
 }
 
+function playGame(){
+    let scores={
+        humanScore: 0,
+        computerScore: 0
+    }
+    for(let i=0; i<5; i++){
+        playRound(getHumanChoice(),getComputerChoice(),scores);
+    }
+    console.log(`Your score: ${scores.humanScore}\nComputer's Score: ${scores.computerScore}`);
+}
 
+playGame();
 
