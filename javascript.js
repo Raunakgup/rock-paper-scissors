@@ -1,4 +1,4 @@
-console.log("Hello world!")
+// console.log("Hello world!")
 
 function getComputerChoice() {
     const val = Math.random();
