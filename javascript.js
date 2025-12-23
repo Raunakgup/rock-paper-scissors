@@ -62,7 +62,6 @@ function disableButtons(){
     });
 }
 function handleButtonClick(e){
-    console.log("emtered");
     const target = e.target;
     if (target.tagName !== "BUTTON") return;
 
