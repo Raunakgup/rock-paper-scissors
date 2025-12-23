@@ -12,11 +12,6 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    return prompt("Enter your choice from rock, paper or scissors: ").trim().toLowerCase();
-}
-// console.log(getHumanChoice());
-
 function whoWins(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) return "tie";
     switch (true) {
@@ -34,29 +29,60 @@ function whoWins(humanChoice, computerChoice) {
             return "computer";
     }
 }
+
 function playRound(humanChoice, computerChoice, scores) {
     const winner = whoWins(humanChoice, computerChoice);
     if (winner === "human") {
-        console.log(`Yay! ${humanChoice} beats ${computerChoice}. You win!`);
         scores.humanScore++;
+        return (`Yay! ${humanChoice} beats ${computerChoice}. You win!`);
     } else if (winner === "computer") {
-        console.log(`Sad! ${computerChoice} beats ${humanChoice}. You lose!`);
         scores.computerScore++;
+        return (`Sad! ${computerChoice} beats ${humanChoice}. You lose!`);
     } else {
-        console.log(`Both chose ${humanChoice}. There's a tie!`);
+        return (`Both chose ${humanChoice}. There's a tie!`);
     }
 }
 
-function playGame(){
-    let scores={
-        humanScore: 0,
-        computerScore: 0
-    }
-    for(let i=0; i<5; i++){
-        playRound(getHumanChoice(),getComputerChoice(),scores);
-    }
-    console.log(`Your score: ${scores.humanScore}\nComputer's Score: ${scores.computerScore}`);
+let scores = {
+    humanScore: 0,
+    computerScore: 0
 }
 
-playGame();
+const buttonContainer = document.querySelector("#button-container");
+const humanScoreSpan = document.querySelector("#human-score");
+const computerScoreSpan = document.querySelector("#computer-score");
+const winOrLoseList = document.querySelector("#win-or-lose-list");
+const winnerAnnouncement = document.querySelector("#winner-announcement");
+
+function disableButtons(){
+    const buttons = buttonContainer.querySelectorAll('button');
+    buttons.forEach(item => {
+        item.disabled=true;
+        item.classList.add("disabled");
+    });
+}
+function handleButtonClick(e){
+    console.log("emtered");
+    const target = e.target;
+    if (target.tagName !== "BUTTON") return;
+
+    const winOrLoseListElement = document.createElement('li'); 
+    winOrLoseListElement.textContent=playRound(target.id, getComputerChoice(), scores);
+    winOrLoseList.appendChild(winOrLoseListElement);
+
+    humanScoreSpan.textContent=scores.humanScore;
+    computerScoreSpan.textContent=scores.computerScore;
+
+    if (scores.humanScore === 5) {
+        winnerAnnouncement.textContent = "Congrats, You won!";
+        disableButtons();
+    } 
+    else if (scores.computerScore === 5) {
+        winnerAnnouncement.textContent = "Oops, you lost!";
+        disableButtons();
+    }
+}
+
+buttonContainer.addEventListener("click", handleButtonClick);
+
 

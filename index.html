@@ -1,12 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    <script src="javascript.js"></script>
+    <script src="javascript.js" defer></script>
+    <style>
+        html{
+            box-sizing: border-box;
+        }
+        *, *::before, *::after{
+            box-sizing: inherit;
+        }
+        .current-scores{
+            display: flex;
+            gap: 36px;
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
+
 <body>
-    
+    <h3>Welcome to the Rock, Paper, Scissors Game!</h3>
+    <p>The one who reaches 5 points first will win.</p>
+    <p>Choose your choice from below: </p>
+    <div id="button-container">
+        <button type="button" id="rock">ROCK</button>
+        <button type="button" id="paper">PAPER</button>
+        <button type="button" id="scissors">SCISSORS</button>
+    </div>
+    <p class="current-scores">
+        <span>Your score: <span id="human-score">0</span> </span>
+        <span>Computer's score: <span id="computer-score">0</span> </span>
+    </p>
+    <ul id="win-or-lose-list">
+    </ul>
+    <p id="winner-announcement"></p>
 </body>
+
 </html>
