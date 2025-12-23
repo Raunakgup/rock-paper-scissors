@@ -7,16 +7,21 @@
     <title>Rock Paper Scissors</title>
     <script src="javascript.js" defer></script>
     <style>
-        html{
+        html {
             box-sizing: border-box;
         }
-        *, *::before, *::after{
+
+        *,
+        *::before,
+        *::after {
             box-sizing: inherit;
         }
-        .current-scores{
+
+        .current-scores {
             display: flex;
             gap: 36px;
         }
+
         button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -37,8 +42,7 @@
         <span>Your score: <span id="human-score">0</span> </span>
         <span>Computer's score: <span id="computer-score">0</span> </span>
     </p>
-    <ul id="win-or-lose-list">
-    </ul>
+    <ul id="win-or-lose-list"></ul>
     <p id="winner-announcement"></p>
 </body>
 
